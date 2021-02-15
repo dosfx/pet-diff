@@ -16,14 +16,10 @@ Vue.createApp({
             return this.percent >= 0;
         },
         twoLimbs() {
-            return this.modifiers.filter(function (m) {
-                return m === "twoLimbs";
-            }).length > 0;
+            return this.modifiers.includes("twoLimbs");
         },
         twoLimbsStack() {
-            return this.modifiers.filter(function (m) {
-                return m === "twoLimbsStack";
-            }).length > 0;
+            return this.modifiers.includes("twoLimbsStack");
         }
     },
     watch: {
@@ -67,7 +63,7 @@ Vue.createApp({
                 serafexHead: 20,
                 wholeBody: 30
             };
-            this.modifiers.forEach(function (m) {
+            this.modifiers.forEach((m) => {
                 basePercent += percents[m];
             })
             this.percent = Math.round(basePercent * 100) / 100;
