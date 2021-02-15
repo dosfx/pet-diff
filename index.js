@@ -33,12 +33,6 @@ Vue.createApp({
             }
         }
     },
-    mounted() {
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl)
-        });
-    },
     methods: {
         origChanged(e) {
             this.percent = -1;
