@@ -56,7 +56,21 @@ Vue.createApp({
             }
             let modifiedDiff = this.diffPx * 0.75;
             let baseAve = (this.origPx + this.editPx) / 2;
-            this.percent = Math.round((modifiedDiff / baseAve) * 10000) / 100;
+            let basePercent = (modifiedDiff / baseAve) * 100;
+            const percents = {
+                singleLimb: 3,
+                twoLimbs: 5,
+                twoLimbsStack: 5,
+                centaur: 10,
+                sittingStanding: 10,
+                bodyExtension: 10,
+                serafexHead: 20,
+                wholeBody: 30
+            };
+            this.modifiers.forEach(function (m) {
+                basePercent += percents[m];
+            })
+            this.percent = Math.round(basePercent * 100) / 100;
         }
     }
 }).component("file-input", {
