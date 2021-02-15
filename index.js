@@ -7,6 +7,7 @@ Vue.createApp({
             percent: -1,
             singleLimb: false,
             twoLimbs: false,
+            twoLimbsStack: false,
             centaur: false,
             sittingStanding: false,
             bodyExtension: false,
@@ -20,6 +21,16 @@ Vue.createApp({
         },
         calcComplete() {
             return this.percent >= 0;
+        }
+    },
+    watch: {
+        twoLimbs(value, old) {
+            let collapse = new bootstrap.Collapse(document.getElementById("twoLimbsStackCollapse"), { toggle: false });
+            if (value) {
+                collapse.show();
+            } else {
+                collapse.hide();
+            }
         }
     },
     mounted() {
@@ -112,7 +123,10 @@ Vue.createApp({
             </div>
         </div>`
 }).component("checkbox", {
-    props: ["modelValue"],
+    props: [
+        "disabled",
+        "modelValue"
+    ],
     emits: ["update:modelValue"],
     computed: {
         id() {
@@ -134,18 +148,20 @@ Vue.createApp({
         }
     },
     template: `
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" v-bind:id="id" v-model="value">
-            <label class="form-check-label" v-bind:for="id">
-                <slot name="label">Checkbox</slot>
-                <a v-if="hasHelp" class="bi-question-circle-fill align-text-bottom ms-1" v-bind:href="'#' + collapseId" data-bs-toggle="collapse" 
-                    role="button" aria-expanded="false" v-bind:aria-controls="collapseId"></a>
-            </label>
-        </div>
-        <div v-if="hasHelp" v-bind:id="collapseId" class="collapse">
-            <p class="border-bottom">
-                <slot name="help"></slot>
-            </p>
+        <div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" v-bind:id="id" v-model="value" v-bind:disabled="disabled">
+                <label class="form-check-label" v-bind:for="id">
+                    <slot name="label">Checkbox</slot>
+                    <a v-if="hasHelp" class="bi-question-circle-fill align-text-bottom ms-1" v-bind:href="'#' + collapseId" data-bs-toggle="collapse" 
+                        role="button" aria-expanded="false" v-bind:aria-controls="collapseId"></a>
+                </label>
+            </div>
+            <div v-if="hasHelp" v-bind:id="collapseId" class="collapse">
+                <p class="border-bottom">
+                    <slot name="help"></slot>
+                </p>
+            </div>
         </div>
     `
 }).mount("#app");

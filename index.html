@@ -44,7 +44,7 @@
                                     repositioned.
                                 </template>
                             </checkbox>
-                            <checkbox v-model="twoLimbs">
+                            <checkbox v-model="twoLimbs" v-bind:disabled="twoLimbsStack">
                                 <template v-slot:label>Two Limbs Reposed</template>
                                 <template v-slot:help>
                                     Where any two limbs, such as legs or flippers, have been moved from their original
@@ -52,14 +52,11 @@
                                     limbs have been repositioned, or with itself if four limbs are repositioned.
                                 </template>
                             </checkbox>
-                            <div id="twoLimbsStackCollapse">
-                                <checkbox v-model="twoLimbsStack">
-                                    <template v-slot:label>Two Limbs Reposed</template>
+                            <div id="twoLimbsStackCollapse" class="collapse">
+                                <checkbox v-model="twoLimbsStack" class="ps-4">
+                                    <template v-slot:label>Two More Limbs Reposed</template>
                                     <template v-slot:help>
-                                        Where any two limbs, such as legs or flippers, have been moved from their
-                                        original position. This modifier can stack with the Single Limb Repose modifier
-                                        if three limbs have been repositioned, or with itself if four limbs are
-                                        repositioned.
+                                        Second Two Limbs Reposed modifier for repositioning four limbs.
                                     </template>
                                 </checkbox>
                             </div>
