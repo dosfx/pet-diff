@@ -5,14 +5,7 @@ Vue.createApp({
             editPx: -1,
             diffPx: -1,
             percent: -1,
-            singleLimb: false,
-            twoLimbs: false,
-            twoLimbsStack: false,
-            centaur: false,
-            sittingStanding: false,
-            bodyExtension: false,
-            serafexHead: false,
-            wholeBody: false
+            modifiers: []
         }
     },
     computed: {
@@ -21,12 +14,23 @@ Vue.createApp({
         },
         calcComplete() {
             return this.percent >= 0;
+        },
+        twoLimbs() {
+            return this.modifiers.filter(function (m) {
+                return m === "twoLimbs";
+            }).length > 0;
+        },
+        twoLimbsStack() {
+            return this.modifiers.filter(function (m) {
+                return m === "twoLimbsStack";
+            }).length > 0;
         }
     },
     watch: {
-        twoLimbs(value, old) {
+        modifiers() {
+            this.percent = -1;
             let collapse = new bootstrap.Collapse(document.getElementById("twoLimbsStackCollapse"), { toggle: false });
-            if (value) {
+            if (this.twoLimbs) {
                 collapse.show();
             } else {
                 collapse.hide();
@@ -119,7 +123,8 @@ Vue.createApp({
 }).component("checkbox", {
     props: [
         "disabled",
-        "modelValue"
+        "modelValue",
+        "value"
     ],
     emits: ["update:modelValue"],
     computed: {
@@ -132,7 +137,7 @@ Vue.createApp({
         hasHelp() {
             return this.$slots.help;
         },
-        value: {
+        checked: {
             get() {
                 return this.modelValue;
             },
@@ -144,7 +149,7 @@ Vue.createApp({
     template: `
         <div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" v-bind:id="id" v-model="value" v-bind:disabled="disabled">
+                <input class="form-check-input" type="checkbox" v-bind:id="id" v-model="checked" v-bind:value="value" v-bind:disabled="disabled">
                 <label class="form-check-label" v-bind:for="id">
                     <slot name="label">Checkbox</slot>
                     <a v-if="hasHelp" class="bi-question-circle-fill align-text-bottom ms-1" v-bind:href="'#' + collapseId" data-bs-toggle="collapse" 

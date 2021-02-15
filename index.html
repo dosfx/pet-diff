@@ -36,7 +36,7 @@
                     <div id="modifiersCollapse" class="accordion-collapse collapse" aria-labelledby="#modifiersHeader"
                         data-bs-parent="#modifiersAccordion">
                         <div class="accordion-body">
-                            <checkbox v-model="singleLimb">
+                            <checkbox v-model="modifiers" value="singleLimb">
                                 <template v-slot:label>Single Limb Reposed</template>
                                 <template v-slot:help>
                                     Where one limb, such as a leg or flipper, has been moved from its original position.
@@ -44,7 +44,7 @@
                                     repositioned.
                                 </template>
                             </checkbox>
-                            <checkbox v-model="twoLimbs" v-bind:disabled="twoLimbsStack">
+                            <checkbox v-model="modifiers" value="twoLimbs" v-bind:disabled="twoLimbsStack">
                                 <template v-slot:label>Two Limbs Reposed</template>
                                 <template v-slot:help>
                                     Where any two limbs, such as legs or flippers, have been moved from their original
@@ -53,42 +53,42 @@
                                 </template>
                             </checkbox>
                             <div id="twoLimbsStackCollapse" class="collapse">
-                                <checkbox v-model="twoLimbsStack" class="ps-4">
+                                <checkbox v-model="modifiers" value="twoLimbsStack" class="ps-4">
                                     <template v-slot:label>Two More Limbs Reposed</template>
                                     <template v-slot:help>
                                         Second Two Limbs Reposed modifier for repositioning four limbs.
                                     </template>
                                 </checkbox>
                             </div>
-                            <checkbox v-model="centaur">
+                            <checkbox v-model="modifiers" value="centaur">
                                 <template v-slot:label>Centaur Pets</template>
                                 <template v-slot:help>
                                     Where the design incorporates a second torso, arms, and a head where the neck
                                     ordinarily would be.
                                 </template>
                             </checkbox>
-                            <checkbox v-model="sittingStanding">
+                            <checkbox v-model="modifiers" value="sittingStanding">
                                 <template v-slot:label>Sitting/Standing Repose</template>
                                 <template v-slot:help>
                                     Where a pet ordinarily standing has its back half edited to a sitting position, or
                                     vice versa.
                                 </template>
                             </checkbox>
-                            <checkbox v-model="bodyExtension">
+                            <checkbox v-model="modifiers" value="bodyExtension">
                                 <template v-slot:label>Body Extension</template>
                                 <template v-slot:help>
                                     Where most of the default body has been retained, but then extended to two or more
                                     times its original length, as in a snake or noodle pet.
                                 </template>
                             </checkbox>
-                            <checkbox v-model="serafexHead">
+                            <checkbox v-model="modifiers" value="serafexHead">
                                 <template v-slot:label>Replacing the Serafex Head</template>
                                 <template v-slot:help>
                                     Due to the head of the Serafex being the only "body" section of the pet, it incurs a
                                     smaller modifier than a Whole Body Replacement.
                                 </template>
                             </checkbox>
-                            <checkbox v-model="wholeBody">
+                            <checkbox v-model="modifiers" value="wholeBody">
                                 <template v-slot:label>Whole Body Replacement</template>
                                 <template v-slot:help>
                                     Where the only remaining part of the default base is the wings, or tail.
