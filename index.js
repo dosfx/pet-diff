@@ -106,12 +106,15 @@ Vue.createApp({
                 image.parse(e.target.result);
             });
             arrReader.readAsArrayBuffer(e.target.files[0]);
+        },
+        fileClick(e) {
+            e.target.value = "";
         }
     },
     template: `
         <div>
             <label v-bind:for="id" class="form-label"><slot></slot></label>
-            <input class="form-control mb-2" type="file" v-bind:id="id" accept=".png,image/png" v-on:change="fileChanged">
+            <input class="form-control mb-2" type="file" v-bind:id="id" accept=".png,image/png" v-on:change="fileChanged" v-on:click="fileClick">
             <div class="mb-2">
                 <img v-if="image" v-bind:src="image" class="img-fluid" />
             </div>
